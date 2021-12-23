@@ -5,7 +5,6 @@
 </template>
 
 <style lang="scss">
-@import "~@/assets/styles/test.scss";
 
 * {
   margin: 0;
