@@ -5,15 +5,17 @@ module.exports = {
   chainWebpack: config => {
     const dir = path.resolve(__dirname, 'src/assets/icons');
 
+    config.module.rules.delete('svg');
+
     config.module
       .rule('svg-sprite')
-      .test(/\.(svg)(\?.*)?$/)
+      .test(/\.svg$/)
       .include.add(dir).end()
       .use('svg-sprite-loader').loader('svg-sprite-loader').options({
         extract: false
       }).end()
       .use('svgo-loader').loader('svgo-loader')
-      .tab(options => ({
+      .tap(options => ({
         ...options,
         plugins: [{
           removeAttrs: {

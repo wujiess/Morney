@@ -41,4 +41,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
+.tags {
+  > .current {
+    display: flex;
+    
+  }
+}
 </style>
