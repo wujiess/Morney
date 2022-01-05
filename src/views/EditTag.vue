@@ -47,11 +47,11 @@ export default class EditTag extends Vue {
     }
   }
   remove() {
-    if (this.tag) {
-      tagsModel.remove(this.tag.id);
+    if (this.tag && tagsModel.remove(this.tag.id)) {
+      this.$router.back();
     }
   }
-  goBack(){
+  goBack() {
     this.$router.back();
   }
 }
