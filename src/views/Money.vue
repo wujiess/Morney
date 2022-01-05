@@ -46,14 +46,12 @@ export default class Money extends Vue {
 
   saveRecord() {
     // eslint-disable-next-line no-undef
-    const r: RecordItem = recordsModel.clone(this.record);
-    r.creationDate = new Date();
-    this.records.push(r);
+    recordsModel.create(this.record);
   }
 
   @Watch("records")
   onRecordsChanged() {
-    recordsModel.save(this.records);
+    recordsModel.save();
   }
 
   onUpdateAmount(value: string) {
