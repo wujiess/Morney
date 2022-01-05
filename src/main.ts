@@ -6,12 +6,15 @@ import store from './store'
 import Nav from '@/components/Nav.vue'
 import Icon from '@/components/Icon.vue'
 import Layout from '@/components/Layout.vue'
+import tagsModel from '@/models/tagsModel'
 
 Vue.config.productionTip = false
 
 Vue.component('Nav', Nav);
 Vue.component('Icon', Icon);
 Vue.component('Layout', Layout)
+
+window.tags = tagsModel.fetch();
 
 new Vue({
   router,

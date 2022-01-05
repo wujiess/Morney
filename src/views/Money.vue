@@ -24,11 +24,10 @@ import recordsModel from "@/models/recordsModel";
 import tagsModel from "@/models/tagsModel";
 
 const records = recordsModel.fetch();
-const tags = tagsModel.fetch();
 
 @Component({ components: { NumberPad, Types, FormItem, Tags } })
 export default class Money extends Vue {
-  tags = tags;
+  tags = window.tags;
   // eslint-disable-next-line no-undef
   records: RecordItem[] = records;
   // eslint-disable-next-line no-undef

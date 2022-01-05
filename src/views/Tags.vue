@@ -22,11 +22,10 @@ import { Component } from "vue-property-decorator";
 import tagsModel from "@/models/tagsModel";
 import Button from "@/components/Button.vue";
 
-tagsModel.fetch();
-
 @Component({ components: { Button } })
 export default class Tags extends Vue {
-  tags = tagsModel.data;
+  tags = window.tags;
+  
   createTag() {
     const name = window.prompt("请输入标签名");
     if (name) {
