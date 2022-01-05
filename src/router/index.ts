@@ -24,7 +24,7 @@ const routes = [
     component: Statistics
   },
   {
-    path: '/tags/edit',
+    path: '/tags/edit/:id',
     component: EditTag
   },
   {
