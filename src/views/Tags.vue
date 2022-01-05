@@ -19,20 +19,16 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import tagsModel from "@/models/tagsModel";
 import Button from "@/components/Button.vue";
 
 @Component({ components: { Button } })
 export default class Tags extends Vue {
   tags = window.tags;
-  
+
   createTag() {
     const name = window.prompt("请输入标签名");
     if (name) {
-      const result = tagsModel.create(name);
-      if (result === "duplicated") {
-        alert("标签名重复了");
-      }
+      window.createTag(name);
     }
   }
 }

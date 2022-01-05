@@ -20,5 +20,9 @@ type TagsModel = {
     save: () => void;
 }
 interface Window {
-    tags: Tag[]
+    tags: Tag[],
+    findTag: (id: string) => Tag | undefined,
+    createTag: (name: string) => void,
+    removeTag: (id: string) => boolean,
+    updateTag: (id: string, name: string) => 'success' | 'not found' | 'duplicated'
 }
