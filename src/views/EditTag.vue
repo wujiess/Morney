@@ -1,13 +1,20 @@
 <template>
-  <layout>编辑标签</layout>
+  <layout>
+    <div>
+      <Icon name="left" />
+      <span>编辑标签</span>
+    </div>
+    <Notes fieldName="标签名" placeholder="请输入标签名" />
+  </layout>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import tagsModel from "@/models/tagsModel";
+import Notes from "@/components/Money/Notes.vue";
 
-@Component
+@Component({ components: { Notes } })
 export default class EditTag extends Vue {
   created() {
     const id = this.$route.params.id;
