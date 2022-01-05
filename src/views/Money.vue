@@ -14,13 +14,15 @@ import Types from "@/components/Money/Types.vue";
 import Notes from "@/components/Money/Notes.vue";
 import Tags from "@/components/Money/Tags.vue";
 import { Component, Watch } from "vue-property-decorator";
-import model from "@/model";
+import recordsModel from "@/models/recordsModel";
+import tagsModel from "@/models/tagsModel";
 
-const records = model.fetch();
+const records = recordsModel.fetch();
+const tags = tagsModel.fetch();
 
 @Component({ components: { NumberPad, Types, Notes, Tags } })
 export default class Money extends Vue {
-  tags = ["衣", "食", "住", "行"];
+  tags = tags;
   // eslint-disable-next-line no-undef
   records: RecordItem[] = records;
   // eslint-disable-next-line no-undef
@@ -36,14 +38,14 @@ export default class Money extends Vue {
 
   saveRecord() {
     // eslint-disable-next-line no-undef
-    const r: RecordItem = model.clone(this.record);
+    const r: RecordItem = recordsModel.clone(this.record);
     r.creationDate = new Date();
     this.records.push(r);
   }
 
   @Watch("records")
   onRecordsChanged() {
-    model.save(this.records);
+    recordsModel.save(this.records);
   }
 
   onUpdateAmount(value: string) {
