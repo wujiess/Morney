@@ -1,8 +1,13 @@
 const localStorageKeyName = "tags";
 
+type Tag = {
+    id: string,
+    name: string
+}
+
 type TagsModel = {
-    data: string[];
-    fetch: () => string[];
+    data: Tag[];
+    fetch: () => Tag[];
     create: (name: string) => 'success' | 'duplicated';
     save: () => void;
 }
@@ -16,12 +21,13 @@ const tagsModel: TagsModel = {
         localStorage.setItem(localStorageKeyName, JSON.stringify(this.data));
     },
     create(name) {
-        const exists = this.data.indexOf(name) > 0;
+        const names = this.data.map(item => item.name);
+        const exists = names.indexOf(name) > 0;
         if (exists) {
             return "duplicated";
         }
         else {
-            this.data.push(name);
+            this.data.push({ id: name, name: name });
             this.save();
             return "success";
         }
