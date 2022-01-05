@@ -1,6 +1,8 @@
 <template>
   <div class="tags">
-    <div class="new"><button @click="create">新增标签</button></div>
+    <div class="new">
+      <button @click="create">新增标签</button>
+    </div>
     <ul class="current">
       <li
         v-for="tag in dataSource"
@@ -22,6 +24,7 @@ import { Component, Prop } from "vue-property-decorator";
 export default class Tags extends Vue {
   @Prop(Array) readonly dataSource: string[] | undefined;
   selectedTags: string[] = [];
+  
   toggle(tag: string) {
     const index = this.selectedTags.indexOf(tag);
     if (index >= 0) {
@@ -44,6 +47,7 @@ export default class Tags extends Vue {
 
 <style lang="scss" scoped>
 .tags {
+  background-color: #fff;
   font-size: 14px;
   padding: 16px;
   flex-grow: 1;

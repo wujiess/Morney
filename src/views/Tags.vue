@@ -1,12 +1,17 @@
 <template>
   <Layout>
     <div class="tags">
-      <router-link class="tag" v-for="tag in tags" :key="tag.id" :to="`/tags/edit/${tag.id}`">
+      <router-link
+        class="tag"
+        v-for="tag in tags"
+        :key="tag.id"
+        :to="`/tags/edit/${tag.id}`"
+      >
         <span>{{ tag.name }}</span> <Icon name="right" />
       </router-link>
     </div>
     <div class="createTag-wrapper">
-      <button class="createTag" @click="createTag">新建标签</button>
+      <Button @click="createTag">新建标签</Button>
     </div>
   </Layout>
 </template>
@@ -15,10 +20,11 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import tagsModel from "@/models/tagsModel";
+import Button from "@/components/Button.vue";
 
 tagsModel.fetch();
 
-@Component
+@Component({ components: { Button } })
 export default class Tags extends Vue {
   tags = tagsModel.data;
   createTag() {
@@ -51,17 +57,9 @@ export default class Tags extends Vue {
     }
   }
 }
-.createTag {
-  background-color: #767676;
-  color: #fff;
-  border-radius: 4px;
-  border: none;
-  height: 40px;
-  padding: 0 16px;
-  &-wrapper {
-    text-align: center;
-    padding: 16px;
-    margin-top: 44-16px;
-  }
+.createTag-wrapper {
+  text-align: center;
+  padding: 16px;
+  margin-top: 44-16px;
 }
 </style>
