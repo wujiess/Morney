@@ -1,15 +1,20 @@
 <template>
   <layout>
     <div class="navBar">
-      <Icon name="left" class="leftIcon" />
+      <Icon name="left" class="leftIcon" @click="goBack" />
       <span>编辑标签</span>
       <span class="rightIcon"></span>
     </div>
     <div class="form-wrapper">
-      <FormItem :value="tag.name" fieldName="标签名" placeholder="请输入标签名" />
+      <FormItem
+        :value="tag.name"
+        @update:value="update"
+        fieldName="标签名"
+        placeholder="请输入标签名"
+      />
     </div>
     <div class="button-wrapper">
-      <Button>删除标签</Button>
+      <Button @click="remove">删除标签</Button>
     </div>
   </layout>
 </template>
@@ -35,6 +40,19 @@ export default class EditTag extends Vue {
     } else {
       this.$router.replace("/404");
     }
+  }
+  update(name: string) {
+    if (this.tag) {
+      tagsModel.update(this.tag.id, name);
+    }
+  }
+  remove() {
+    if (this.tag) {
+      tagsModel.remove(this.tag.id);
+    }
+  }
+  goBack(){
+    this.$router.back();
   }
 }
 </script>
