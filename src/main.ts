@@ -7,6 +7,7 @@ import Nav from '@/components/Nav.vue'
 import Icon from '@/components/Icon.vue'
 import Layout from '@/components/Layout.vue'
 import tagsModel from '@/models/tagsModel'
+import recordsModel from './models/recordsModel'
 
 Vue.config.productionTip = false
 
@@ -14,6 +15,13 @@ Vue.component('Nav', Nav);
 Vue.component('Icon', Icon);
 Vue.component('Layout', Layout)
 
+//record store
+window.records = recordsModel.fetch();
+window.createRecord = (record: RecordItem) => {
+  recordsModel.create(record);
+}
+
+//tag store
 window.tags = tagsModel.fetch();
 window.findTag = (id: string) => {
   return window.tags.filter((t) => t.id === id)[0];
