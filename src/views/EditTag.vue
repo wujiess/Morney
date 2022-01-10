@@ -27,7 +27,7 @@ import Button from "@/components/Button.vue";
 
 @Component({ components: { FormItem, Button } })
 export default class EditTag extends Vue {
-  tag = window.findTag(this.$route.params.id);
+  tag? = undefined;
 
   created() {
     if (!this.tag) {
@@ -36,17 +36,18 @@ export default class EditTag extends Vue {
   }
   update(name: string) {
     if (this.tag) {
-      window.updateTag(this.tag.id, name);
+      //store.updateTag(this.tag.id, name);
     }
   }
   remove() {
     if (this.tag) {
-      const result = window.removeTag(this.tag.id);
-      if (result) {
-        this.$router.back();
-      } else {
-        alert("删除失败");
-      }
+      return;
+      // const result = store.removeTag(this.tag.id);
+      // if (result) {
+      //   this.$router.back();
+      // } else {
+      //   alert("删除失败");
+      // }
     }
   }
   goBack() {

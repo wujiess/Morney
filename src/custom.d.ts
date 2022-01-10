@@ -19,13 +19,3 @@ type TagsModel = {
     remove: (id: string) => boolean;
     save: () => void;
 }
-interface Window {
-    tags: Tag[],
-    findTag: (id: string) => Tag | undefined,
-    createTag: (name: string) => void,
-    removeTag: (id: string) => boolean,
-    updateTag: (id: string, name: string) => 'success' | 'not found' | 'duplicated',
-
-    records: RecordItem[],
-    createRecord: (record: RecordItem) => void
-}

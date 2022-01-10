@@ -21,14 +21,21 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Button from "@/components/Button.vue";
 
-@Component({ components: { Button } })
+@Component({
+  components: { Button },
+  computed: {
+    records() {
+      return this.$store.state.records;
+    },
+  },
+})
 export default class Tags extends Vue {
-  tags = window.tags;
+  tags = this.$store.state.tags;
 
   createTag() {
     const name = window.prompt("请输入标签名");
     if (name) {
-      window.createTag(name);
+      this.$store.commit("createTag", name);
     }
   }
 }

@@ -9,7 +9,7 @@
         placeholder="在这里输入备注"
       />
     </div>
-    <Tags :dataSource.sync="tags" @update:value="onUpdateTags" />
+    <Tags />
   </Layout>
 </template>
 
@@ -21,32 +21,28 @@ import FormItem from "@/components/Money/FormItem.vue";
 import Tags from "@/components/Money/Tags.vue";
 import { Component } from "vue-property-decorator";
 
-@Component({ components: { NumberPad, Types, FormItem, Tags } })
+@Component({
+  components: { NumberPad, Types, FormItem, Tags },
+  computed: {
+    records() {
+      return this.$store.state.records;
+    },
+  },
+})
 export default class Money extends Vue {
-  tags = window.tags;
-  // eslint-disable-next-line no-undef
-  records = window.records;
   // eslint-disable-next-line no-undef
   record: RecordItem = { tags: [], notes: "", type: "-", amount: 0 };
 
-  onUpdateTags(value: string[]) {
-    console.log(value);
-    this.record.tags = value;
+  created() {
+    this.$store.commit("fetchRecords");
   }
 
   onUpdateNotes(value: string) {
-    console.log(value);
     this.record.notes = value;
   }
 
   saveRecord() {
-    // eslint-disable-next-line no-undef
-    window.createRecord(this.record);
-  }
-
-  onUpdateAmount(value: string) {
-    console.log(value);
-    this.record.amount = parseFloat(value);
+    this.$store.commit("createRecord", this.record);
   }
 }
 </script>
