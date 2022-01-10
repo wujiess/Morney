@@ -7,11 +7,18 @@ Vue.use(Vuex)
 const localStorageRecordsKeyName = "records";
 const localStorageTagsKeyName = "tags";
 
+type RootState = {
+  records: RecordItem[],
+  tags: Tag[],
+  currentTag?: Tag
+}
+
 const store = new Vuex.Store({
   state: {
     records: [] as RecordItem[],
-    tags: [] as Tag[]
-  },
+    tags: [] as Tag[],
+    currentTag: undefined
+  } as RootState,
   mutations: {
     fetchRecords(state) {
       state.records = JSON.parse(localStorage.getItem(localStorageRecordsKeyName) || "[]") as RecordItem[];
@@ -27,25 +34,26 @@ const store = new Vuex.Store({
       localStorage.setItem(localStorageRecordsKeyName, JSON.stringify(state.records));
     },
     fetchTags(state) {
-      return state.tags = JSON.parse(localStorage.getItem(localStorageTagsKeyName) || "[]") as Tag[];
+      state.tags = JSON.parse(localStorage.getItem(localStorageTagsKeyName) || "[]") as Tag[];
     },
     createTag(state, name: string) {
       const names = state.tags.map(item => item.name);
       const exists = names.indexOf(name) > 0;
       if (exists) {
         alert("标签名重复了");
-        return "duplicated";
       }
       else {
         const id = createId().toString();
         state.tags.push({ id, name: name });
         store.commit('saveTags')
-        return "success";
       }
     },
     saveTags(state) {
       localStorage.setItem(localStorageTagsKeyName, JSON.stringify(state.tags));
-    }
+    },
+    setCurrentTag(state, id: string) {
+      state.currentTag = state.tags.filter((t) => t.id === id)[0];
+    },
   },
 })
 
