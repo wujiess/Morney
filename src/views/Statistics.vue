@@ -16,13 +16,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Types from "@/components/Money/Types.vue";
 import Tabs from "@/components/Money/Tabs.vue";
 import Component from "vue-class-component";
 import intervals from "@/constants/intervals";
 import recordTypes from "@/constants/recordTypes";
 
-@Component({ components: { Types, Tabs } })
+@Component({ components: { Tabs } })
 export default class Statistics extends Vue {
   type = "-";
   interval = "day";
