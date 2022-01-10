@@ -26,40 +26,30 @@ import FormItem from "@/components/Money/FormItem.vue";
 import Button from "@/components/Button.vue";
 
 @Component({
-  components: { FormItem, Button },
-  computed: {
-    currentTag() {
-      return this.$store.state.currentTag;
-    },
-  },
+  components: { FormItem, Button }
 })
 export default class EditTag extends Vue {
-  get tag() {
+  get currentTag() {
     return this.$store.state.currentTag;
   }
 
   created() {
     const id = this.$route.params.id;
-    console.log(id);
+    this.$store.commit("fetchTags");
     this.$store.commit("setCurrentTag", id);
-    if (!this.tag) {
+    if (!this.currentTag) {
       this.$router.replace("/404");
     }
   }
   update(name: string) {
-    if (this.tag) {
-      //store.updateTag(this.tag.id, name);
+    if (this.currentTag) {
+      this.$store.commit("updateTag", { id: this.currentTag.id, name });
     }
   }
   remove() {
-    if (this.tag) {
-      return;
-      // const result = store.removeTag(this.tag.id);
-      // if (result) {
-      //   this.$router.back();
-      // } else {
-      //   alert("删除失败");
-      // }
+    if (this.currentTag) {
+      this.$store.commit("removeTag", this.currentTag.id);
+      this.$router.back();
     }
   }
   goBack() {
