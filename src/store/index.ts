@@ -7,12 +7,6 @@ Vue.use(Vuex)
 const localStorageRecordsKeyName = "records";
 const localStorageTagsKeyName = "tags";
 
-type RootState = {
-  records: RecordItem[],
-  tags: Tag[],
-  currentTag?: Tag
-}
-
 const store = new Vuex.Store({
   state: {
     records: [] as RecordItem[],
@@ -25,7 +19,7 @@ const store = new Vuex.Store({
     },
     createRecord(state, record) {
       const r: RecordItem = clone(record);
-      r.creationDate = new Date();
+      r.creationDate = new Date().toISOString();
       state.records?.push(r);
       store.commit('saveRecords');
       //recordStore.saveRecords();
